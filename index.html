@@ -8,6 +8,7 @@
     body {
         margin: 0;
         overflow: hidden;
+      background-color:  #cdedf7;
     }
     canvas {
         display: block;
@@ -42,14 +43,14 @@
         // Loop through horizontal pixels
         for (let x = 0; x < canvas.width; x++) {
             // Calculate the vertical position of the wave
-            const y = canvas.height / 2 + amplitude * Math.sin(frequency * x + phase);
+            const y = canvas.height / 4 + amplitude * Math.sin(frequency * x + phase);
 
             // Draw a line to the current position
             ctx.lineTo(x, y);
         }
 
         // Set line properties
-        ctx.strokeStyle = 'blue';
+        ctx.strokeStyle = 'orange';
         ctx.lineWidth = 2;
 
         // Stroke the path
