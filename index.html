@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flowing Line Wave</title>
-<link rel="stylesheet" href="styles.css">
 <style>
     body {
         margin: 0;
         overflow: hidden;
-      background-color:  #c5dbed;
+        background-color:  #c5dbed;
     }
     canvas {
         display: block;
@@ -19,7 +18,7 @@
 <body>
 <canvas id="canvas"></canvas>
 
-  <script>
+<script>
     // Get the canvas element and its context
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -29,9 +28,9 @@
     canvas.height = window.innerHeight;
 
     // Define parameters for the wave
-    const amplitude = 20;
+    let amplitude = 20;
     const frequency = 0.02;
-    const phaseSpeed = 0.05;
+    let phaseSpeed = 0.05;
     let phase = 0;
 
     // Function to draw the wave
@@ -67,7 +66,18 @@
 
     // Call the drawWave function to start the animation
     drawWave();
-    
+
+    // Event listener for mouse enter
+    canvas.addEventListener('mouseenter', function() {
+        // Increase the phase speed to speed up the animation
+        phaseSpeed = 0.1;
+    });
+
+    // Event listener for mouse leave
+    canvas.addEventListener('mouseleave', function() {
+        // Revert the phase speed back to its original value
+        phaseSpeed = 0.05;
+    });
 </script>
 
 </body>
