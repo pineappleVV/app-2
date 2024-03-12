@@ -1,28 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- 
-      This is an HTML comment
-      You can write text in a comment and the content won't be visible in the page
-    -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flowing Line Wave</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+    canvas {
+        display: block;
+    }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+    // Get the canvas element and its context
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    // Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    <!--
-      This is the page head - it contains info the browser uses
-      Like the title, which appears on the browser tab but not inside the page
-      Further down you'll see the content that displays in the page
-    -->
-    <title>Hello World!</title>
+    // Define parameters for the wave
+    const amplitude = 50;
+    const frequency = 0.02;
+    const phaseSpeed = 0.05;
+    let phase = 0;
 
-    <!-- The website stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+    // Function to draw the wave
+    function drawWave() {
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    <!-- The website JavaScript file -->
-    <script src="/script.js" defer></script>
-  </head>
-  <
-  </body>
+        // Begin drawing the path
+        ctx.beginPath();
+
+        // Loop through horizontal pixels
+        for (let x = 0; x < canvas.width; x++) {
+            // Calculate the vertical position of the wave
+            const y = canvas.height / 2 + amplitude * Math.sin(frequency * x + phase);
+
+            // Draw a line to the current position
+            ctx.lineTo(x, y);
+        }
+
+        // Set line properties
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2;
+
+        // Stroke the path
+        ctx.stroke();
+
+        // Increment the phase to create animation
+        phase += phaseSpeed;
+
+        // Request animation frame to create smooth animation
+        requestAnimationFrame(drawWave);
+    }
+
+    // Call the drawWave function to start the animation
+    drawWave();
+</script>
+</body>
 </html>
+
