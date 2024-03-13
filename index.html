@@ -8,7 +8,7 @@
     body {
         margin: 0;
         overflow: hidden;
-        background-color:  #c5dbed;
+        background-color: #c5dbed;
     }
     canvas {
         display: block;
@@ -32,6 +32,11 @@
     const frequency = 0.02;
     let phaseSpeed = 0.05;
     let phase = 0;
+
+    // Function to calculate the distance between two points
+    function distance(x1, y1, x2, y2) {
+        return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    }
 
     // Function to draw the wave
     function drawWave() {
@@ -67,16 +72,19 @@
     // Call the drawWave function to start the animation
     drawWave();
 
-    // Event listener for mouse enter
-    canvas.addEventListener('mouseenter', function() {
-        // Increase the phase speed to speed up the animation
-        phaseSpeed = 0.1;
-    });
+    // Event listener for mouse move
+    canvas.addEventListener('mousemove', function(event) {
+        // Calculate the distance between the mouse pointer and the wave
+        const distToWave = Math.abs(event.clientY - canvas.height / 4);
 
-    // Event listener for mouse leave
-    canvas.addEventListener('mouseleave', function() {
-        // Revert the phase speed back to its original value
-        phaseSpeed = 0.05;
+        // Adjust the phase speed based on the distance
+        if (distToWave < 50) { // Adjust the threshold as needed
+            phaseSpeed = 0.1; // Speed up when close to the wave
+            amplitude = 40;
+        } else {
+            phaseSpeed = 0.05; // Return to normal speed otherwise
+            amplitude = 20;
+        }
     });
 </script>
 
